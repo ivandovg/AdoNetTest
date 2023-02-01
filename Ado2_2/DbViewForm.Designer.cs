@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabTeachers = new System.Windows.Forms.TabPage();
+            this.tabGroups = new System.Windows.Forms.TabPage();
             this.btnAdd = new System.Windows.Forms.Button();
             this.edDepartment = new System.Windows.Forms.NumericUpDown();
             this.edBirthdate = new System.Windows.Forms.DateTimePicker();
@@ -50,8 +50,8 @@
             this.dgvGroups = new System.Windows.Forms.DataGridView();
             this.btnUpdateGroup = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tabTeachers.SuspendLayout();
+            this.tabGroups.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edDepartment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTeachers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edFacultyId)).BeginInit();
@@ -60,8 +60,8 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabTeachers);
+            this.tabControl1.Controls.Add(this.tabGroups);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -69,43 +69,43 @@
             this.tabControl1.Size = new System.Drawing.Size(650, 471);
             this.tabControl1.TabIndex = 11;
             // 
-            // tabPage1
+            // tabTeachers
             // 
-            this.tabPage1.Controls.Add(this.btnAdd);
-            this.tabPage1.Controls.Add(this.edDepartment);
-            this.tabPage1.Controls.Add(this.edBirthdate);
-            this.tabPage1.Controls.Add(this.label4);
-            this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.edLastname);
-            this.tabPage1.Controls.Add(this.edFirstname);
-            this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.btnUpdate);
-            this.tabPage1.Controls.Add(this.dgvTeachers);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(642, 445);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabTeachers.Controls.Add(this.btnAdd);
+            this.tabTeachers.Controls.Add(this.edDepartment);
+            this.tabTeachers.Controls.Add(this.edBirthdate);
+            this.tabTeachers.Controls.Add(this.label4);
+            this.tabTeachers.Controls.Add(this.label3);
+            this.tabTeachers.Controls.Add(this.edLastname);
+            this.tabTeachers.Controls.Add(this.edFirstname);
+            this.tabTeachers.Controls.Add(this.label2);
+            this.tabTeachers.Controls.Add(this.label1);
+            this.tabTeachers.Controls.Add(this.btnUpdate);
+            this.tabTeachers.Controls.Add(this.dgvTeachers);
+            this.tabTeachers.Location = new System.Drawing.Point(4, 22);
+            this.tabTeachers.Name = "tabTeachers";
+            this.tabTeachers.Padding = new System.Windows.Forms.Padding(3);
+            this.tabTeachers.Size = new System.Drawing.Size(642, 445);
+            this.tabTeachers.TabIndex = 0;
+            this.tabTeachers.Text = "Teachers";
+            this.tabTeachers.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // tabGroups
             // 
-            this.tabPage2.Controls.Add(this.btnUpdateGroup);
-            this.tabPage2.Controls.Add(this.btnAddGroup);
-            this.tabPage2.Controls.Add(this.edFacultyId);
-            this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.edGroupName);
-            this.tabPage2.Controls.Add(this.lbGroupName);
-            this.tabPage2.Controls.Add(this.dgvGroups);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(642, 445);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabGroups.Controls.Add(this.btnUpdateGroup);
+            this.tabGroups.Controls.Add(this.btnAddGroup);
+            this.tabGroups.Controls.Add(this.edFacultyId);
+            this.tabGroups.Controls.Add(this.label5);
+            this.tabGroups.Controls.Add(this.edGroupName);
+            this.tabGroups.Controls.Add(this.lbGroupName);
+            this.tabGroups.Controls.Add(this.dgvGroups);
+            this.tabGroups.Location = new System.Drawing.Point(4, 22);
+            this.tabGroups.Name = "tabGroups";
+            this.tabGroups.Padding = new System.Windows.Forms.Padding(3);
+            this.tabGroups.Size = new System.Drawing.Size(642, 445);
+            this.tabGroups.TabIndex = 1;
+            this.tabGroups.Text = "Groups";
+            this.tabGroups.UseVisualStyleBackColor = true;
             // 
             // btnAdd
             // 
@@ -297,10 +297,10 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "DbViewForm";
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.tabTeachers.ResumeLayout(false);
+            this.tabTeachers.PerformLayout();
+            this.tabGroups.ResumeLayout(false);
+            this.tabGroups.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edDepartment)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTeachers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edFacultyId)).EndInit();
@@ -312,7 +312,7 @@
         #endregion
 
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabTeachers;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.NumericUpDown edDepartment;
         private System.Windows.Forms.DateTimePicker edBirthdate;
@@ -324,7 +324,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.DataGridView dgvTeachers;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabGroups;
         private System.Windows.Forms.Button btnUpdateGroup;
         private System.Windows.Forms.Button btnAddGroup;
         private System.Windows.Forms.NumericUpDown edFacultyId;

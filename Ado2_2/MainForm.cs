@@ -63,6 +63,7 @@ namespace Ado2_2
             {
                 sqlConnection.Open();
                 DbViewForm dbViewForm = new DbViewForm(sqlConnection);
+                Hide();
                 dbViewForm.ShowDialog();
             }
             catch(Exception ex)
@@ -71,6 +72,7 @@ namespace Ado2_2
             }
             finally
             {
+                Show();
                 sqlConnection?.Close();
             }
         }
