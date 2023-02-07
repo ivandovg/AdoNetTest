@@ -48,7 +48,7 @@ namespace Ado2_2
         {
             btnAdd.Enabled = false;
             
-            string sql = "INSERT INTO[Teachers]([Firstname], [Lastname], [Birthdate], [DepartmentId]) VALUES(@firstName,@lastName,@birth,@dep)";
+            string sql = "WAITFOR DELAY '00:00:05'; INSERT INTO[Teachers]([Firstname], [Lastname], [Birthdate], [DepartmentId]) VALUES(@firstName,@lastName,@birth,@dep)";
             SqlCommand command = new SqlCommand(sql, sqlConnection);
             try
             {
@@ -63,7 +63,19 @@ namespace Ado2_2
                 SqlParameter dep = new SqlParameter("@dep", SqlDbType.Int);
                 dep.Value = (int)edDepartment.Value;
                 command.Parameters.Add(dep);
-                await command.ExecuteNonQueryAsync();
+                // v1
+                //await command.ExecuteNonQueryAsync();
+
+                // v2 use callback
+                var state = command.BeginExecuteNonQuery(ExecuteQueryCallback, command);
+
+                //// v3
+                //while (!state.IsCompleted)
+                //{
+                //    // что-то выполняем пока работает асинхронная команда
+                //}
+                // заверщаем асинхронный вызов
+                //int result = command.EndExecuteNonQuery(state);
             }
             catch (Exception ex)
             {
@@ -71,8 +83,34 @@ namespace Ado2_2
             }
             finally
             {
+                //btnAdd.Enabled = true;
+                //UpdateTechersView();
+            }
+        }
+
+        private void ExecuteQueryCallback(IAsyncResult result)
+        {
+            // получаем ссылку на объект, который запустил асинхронную опреацию
+            SqlCommand command=result.AsyncState as SqlCommand;
+            if (command == null)
+                return;
+
+            // завершаем асинхронную операцию
+            int rowcount = command.EndExecuteNonQuery(result);
+
+            // обновить DataGridView
+            Action a = () =>
+            {
                 btnAdd.Enabled = true;
                 UpdateTechersView();
+            };
+            if (InvokeRequired)
+            {
+                Invoke(a);
+            }
+            else
+            {
+                a();
             }
         }
 

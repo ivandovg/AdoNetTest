@@ -24,9 +24,9 @@ namespace Ado3_2
 
             // отображаем список таблиц
             cmbTables.DataSource = teachersDb.TableNames;
-            //cmbTables.DisplayMember = "";
-            //cmbTables.ValueMember = "";
-            //object i = cmbTables.SelectedValue;
+            //cmbTables.DisplayMember = "Name";
+            //cmbTables.ValueMember = "Id";
+            //object id = cmbTables.SelectedValue;
 
             cmbTables.DropDownStyle = ComboBoxStyle.DropDownList;
         }
