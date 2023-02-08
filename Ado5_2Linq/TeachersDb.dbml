@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="TeachersDb" Class="TeachersDbDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(local)\sqlexpress;Initial Catalog=TeachersDb;Integrated Security=True" SettingsObjectName="Ado5_2Linq.Properties.Settings" SettingsPropertyName="TeachersDbConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Achievements" Member="Achievements">
+    <Type Name="Achievements">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StudentId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SubjectId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Assesment" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Students_Achievements" Member="Students" ThisKey="StudentId" OtherKey="Id" Type="Students" IsForeignKey="true" />
+      <Association Name="Subjects_Achievements" Member="Subjects" ThisKey="SubjectId" OtherKey="Id" Type="Subjects" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TeacherSubject" Member="TeacherSubject">
+    <Type Name="TeacherSubject">
+      <Column Name="TeacherId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SubjectId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Subjects_TeacherSubject" Member="Subjects" ThisKey="SubjectId" OtherKey="Id" Type="Subjects" IsForeignKey="true" />
+      <Association Name="Teachers_TeacherSubject" Member="Teachers" ThisKey="TeacherId" OtherKey="Id" Type="Teachers" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Departments" Member="Departments">
+    <Type Name="Departments">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Department" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Association Name="Departments_Teachers" Member="Teachers" ThisKey="Id" OtherKey="DepartmentId" Type="Teachers" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Faculties" Member="Faculties">
+    <Type Name="Faculties">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(40) NOT NULL" CanBeNull="false" />
+      <Association Name="Faculties_Groups" Member="Groups" ThisKey="Id" OtherKey="FacultyId" Type="Groups" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Groups" Member="Groups">
+    <Type Name="Groups">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="FacultyId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StudentsCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Groups_Students" Member="Students" ThisKey="Id" OtherKey="GroupId" Type="Students" />
+      <Association Name="Faculties_Groups" Member="Faculties" ThisKey="FacultyId" OtherKey="Id" Type="Faculties" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Students" Member="Students">
+    <Type Name="Students">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="BirthDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Grants" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="GroupId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Students_Achievements" Member="Achievements" ThisKey="Id" OtherKey="StudentId" Type="Achievements" />
+      <Association Name="Groups_Students" Member="Groups" ThisKey="GroupId" OtherKey="Id" Type="Groups" IsForeignKey="true" DeleteRule="SET NULL" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Subjects" Member="Subjects">
+    <Type Name="Subjects">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(40) NOT NULL" CanBeNull="false" />
+      <Association Name="Subjects_Achievements" Member="Achievements" ThisKey="Id" OtherKey="SubjectId" Type="Achievements" />
+      <Association Name="Subjects_TeacherSubject" Member="TeacherSubject" ThisKey="Id" OtherKey="SubjectId" Type="TeacherSubject" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Teachers" Member="Teachers">
+    <Type Name="Teachers">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Firstname" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Lastname" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Birthdate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="DepartmentId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Teachers_TeacherSubject" Member="TeacherSubject" ThisKey="Id" OtherKey="TeacherId" Type="TeacherSubject" />
+      <Association Name="Departments_Teachers" Member="Departments" ThisKey="DepartmentId" OtherKey="Id" Type="Departments" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
