@@ -1,0 +1,785 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище TeachersDbModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Achievements">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="SubjectId" Type="int" Nullable="false" />
+          <Property Name="Assesment" Type="int" />
+        </EntityType>
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Department" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Faculties">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="FacultyId" Type="int" Nullable="false" />
+          <Property Name="StudentsCount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="BirthDate" Type="date" Nullable="false" />
+          <Property Name="Grants" Type="money" />
+          <Property Name="Email" Type="nvarchar" MaxLength="250" />
+          <Property Name="GroupId" Type="int" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Subjects">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Teachers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Firstname" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Lastname" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Birthdate" Type="date" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TeacherSubject">
+          <Key>
+            <PropertyRef Name="TeacherId" />
+            <PropertyRef Name="SubjectId" />
+          </Key>
+          <Property Name="TeacherId" Type="int" Nullable="false" />
+          <Property Name="SubjectId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "TeachersDb.dbo.AllInSummer" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="AllInSummer">
+          <Key>
+            <PropertyRef Name="In Summer" />
+          </Key>
+          <Property Name="In Summer" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="Count" Type="int" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "TeachersDb.dbo.StudentAssesments" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="StudentAssesments">
+          <Key>
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="FullName" />
+            <PropertyRef Name="BirthDate" />
+            <PropertyRef Name="GroupName" />
+            <PropertyRef Name="Faculty" />
+          </Key>
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="81" Nullable="false" />
+          <Property Name="BirthDate" Type="date" Nullable="false" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Faculty" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Assesment" Type="int" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "TeachersDb.dbo.Students1998" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Students1998">
+          <Key>
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="BirthDate" />
+          </Key>
+          <Property Name="FirstName" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="BirthDate" Type="date" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "TeachersDb.dbo.StudentsInsertAllow" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="StudentsInsertAllow">
+          <Key>
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="BirthDate" />
+          </Key>
+          <Property Name="FirstName" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="BirthDate" Type="date" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "TeachersDb.dbo.StudentsWithoutAssesments" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="StudentsWithoutAssesments">
+          <Key>
+            <PropertyRef Name="GroupName" />
+            <PropertyRef Name="FullName" />
+          </Key>
+          <Property Name="GroupName" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="81" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "TeachersDb.dbo.ViewDepartmentFaculty" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="ViewDepartmentFaculty">
+          <Key>
+            <PropertyRef Name="Faculty" />
+            <PropertyRef Name="DepName" />
+            <PropertyRef Name="WorkPhone" />
+          </Key>
+          <Property Name="Faculty" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="DepName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="WorkPhone" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Achieveme__Stude__656C112C">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="Achievements" Type="Self.Achievements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Achievements">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Achieveme__Subje__66603565">
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="1" />
+          <End Role="Achievements" Type="Self.Achievements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Achievements">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Groups__FacultyI__5FB337D6">
+          <End Role="Faculties" Type="Self.Faculties" Multiplicity="1" />
+          <End Role="Groups" Type="Self.Groups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculties">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Groups">
+              <PropertyRef Name="FacultyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teachers__Depart__286302EC">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="Teachers" Type="Self.Teachers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teachers">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Groups">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subjects_TeacherSubject">
+          <End Role="Subjects" Type="Self.Subjects" Multiplicity="1" />
+          <End Role="TeacherSubject" Type="Self.TeacherSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TeacherSubject">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teachers_TeacherSubject">
+          <End Role="Teachers" Type="Self.Teachers" Multiplicity="1" />
+          <End Role="TeacherSubject" Type="Self.TeacherSubject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teachers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TeacherSubject">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AddNewGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="groupName" Type="nvarchar" Mode="In" />
+          <Parameter Name="faculty" Type="int" Mode="In" />
+          <Parameter Name="groupId" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="GetAllPeoples" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="FullName" Type="nvarchar" MaxLength="200" />
+                <Property Name="BirthDate" Type="date" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="ShowGroupFaculty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="faculty" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="TeacherAgeById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="age" Type="int" Mode="InOut" />
+          <Parameter Name="day" Type="int" Mode="InOut" />
+          <Parameter Name="month" Type="int" Mode="InOut" />
+        </Function>
+        <EntityContainer Name="Хранилище TeachersDbModelContainer">
+          <EntitySet Name="Achievements" EntityType="Self.Achievements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Faculties" EntityType="Self.Faculties" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teachers" EntityType="Self.Teachers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TeacherSubject" EntityType="Self.TeacherSubject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AllInSummer" EntityType="Self.AllInSummer" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AllInSummer].[In Summer] AS [In Summer], 
+    [AllInSummer].[Count] AS [Count]
+    FROM [dbo].[AllInSummer] AS [AllInSummer]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="StudentAssesments" EntityType="Self.StudentAssesments" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [StudentAssesments].[StudentId] AS [StudentId], 
+    [StudentAssesments].[FullName] AS [FullName], 
+    [StudentAssesments].[BirthDate] AS [BirthDate], 
+    [StudentAssesments].[GroupName] AS [GroupName], 
+    [StudentAssesments].[Faculty] AS [Faculty], 
+    [StudentAssesments].[Assesment] AS [Assesment]
+    FROM [dbo].[StudentAssesments] AS [StudentAssesments]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Students1998" EntityType="Self.Students1998" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Students1998].[FirstName] AS [FirstName], 
+    [Students1998].[LastName] AS [LastName], 
+    [Students1998].[BirthDate] AS [BirthDate]
+    FROM [dbo].[Students1998] AS [Students1998]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="StudentsInsertAllow" EntityType="Self.StudentsInsertAllow" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [StudentsInsertAllow].[FirstName] AS [FirstName], 
+    [StudentsInsertAllow].[LastName] AS [LastName], 
+    [StudentsInsertAllow].[BirthDate] AS [BirthDate]
+    FROM [dbo].[StudentsInsertAllow] AS [StudentsInsertAllow]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="StudentsWithoutAssesments" EntityType="Self.StudentsWithoutAssesments" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [StudentsWithoutAssesments].[GroupName] AS [GroupName], 
+    [StudentsWithoutAssesments].[FullName] AS [FullName]
+    FROM [dbo].[StudentsWithoutAssesments] AS [StudentsWithoutAssesments]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ViewDepartmentFaculty" EntityType="Self.ViewDepartmentFaculty" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ViewDepartmentFaculty].[Faculty] AS [Faculty], 
+    [ViewDepartmentFaculty].[DepName] AS [DepName], 
+    [ViewDepartmentFaculty].[WorkPhone] AS [WorkPhone]
+    FROM [dbo].[ViewDepartmentFaculty] AS [ViewDepartmentFaculty]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Achieveme__Stude__656C112C" Association="Self.FK__Achieveme__Stude__656C112C">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Achievements" EntitySet="Achievements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Achieveme__Subje__66603565" Association="Self.FK__Achieveme__Subje__66603565">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Achievements" EntitySet="Achievements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Groups__FacultyI__5FB337D6" Association="Self.FK__Groups__FacultyI__5FB337D6">
+            <End Role="Faculties" EntitySet="Faculties" />
+            <End Role="Groups" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teachers__Depart__286302EC" Association="Self.FK__Teachers__Depart__286302EC">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Teachers" EntitySet="Teachers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Groups" Association="Self.FK_Students_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subjects_TeacherSubject" Association="Self.FK_Subjects_TeacherSubject">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="TeacherSubject" EntitySet="TeacherSubject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teachers_TeacherSubject" Association="Self.FK_Teachers_TeacherSubject">
+            <End Role="Teachers" EntitySet="Teachers" />
+            <End Role="TeacherSubject" EntitySet="TeacherSubject" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TeachersDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="GetAllPeoples_Result">
+          <Property Name="FullName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDate" Type="DateTime" />
+        </ComplexType>
+        <EntityType Name="Achievement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="SubjectId" Type="Int32" Nullable="false" />
+          <Property Name="Assesment" Type="Int32" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__Achieveme__Stude__656C112C" FromRole="Achievements" ToRole="Students" />
+          <NavigationProperty Name="Subject" Relationship="Self.FK__Achieveme__Subje__66603565" FromRole="Achievements" ToRole="Subjects" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Department1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Teachers" Relationship="Self.FK__Teachers__Depart__286302EC" FromRole="Departments" ToRole="Teachers" />
+        </EntityType>
+        <EntityType Name="Faculty">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Groups" Relationship="Self.FK__Groups__FacultyI__5FB337D6" FromRole="Faculties" ToRole="Groups" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FacultyId" Type="Int32" Nullable="false" />
+          <Property Name="StudentsCount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Faculty" Relationship="Self.FK__Groups__FacultyI__5FB337D6" FromRole="Groups" ToRole="Faculties" />
+          <NavigationProperty Name="Students" Relationship="Self.FK_Students_Groups" FromRole="Groups" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Grants" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="GroupId" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="Achievements" Relationship="Self.FK__Achieveme__Stude__656C112C" FromRole="Students" ToRole="Achievements" />
+          <NavigationProperty Name="Group" Relationship="Self.FK_Students_Groups" FromRole="Students" ToRole="Groups" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Achievements" Relationship="Self.FK__Achieveme__Subje__66603565" FromRole="Subjects" ToRole="Achievements" />
+          <NavigationProperty Name="Teachers" Relationship="Self.TeacherSubject" FromRole="Subjects" ToRole="Teachers" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Firstname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Lastname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Birthdate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Department" Relationship="Self.FK__Teachers__Depart__286302EC" FromRole="Teachers" ToRole="Departments" />
+          <NavigationProperty Name="Subjects" Relationship="Self.TeacherSubject" FromRole="Teachers" ToRole="Subjects" />
+        </EntityType>
+        <EntityType Name="AllInSummer">
+          <Key>
+            <PropertyRef Name="In_Summer" />
+          </Key>
+          <Property Name="In_Summer" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Count" Type="Int32" />
+        </EntityType>
+        <EntityType Name="StudentAssesment">
+          <Key>
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="FullName" />
+            <PropertyRef Name="BirthDate" />
+            <PropertyRef Name="GroupName" />
+            <PropertyRef Name="Faculty" />
+          </Key>
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="FullName" Type="String" MaxLength="81" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="GroupName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Faculty" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Assesment" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Students1998">
+          <Key>
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="BirthDate" />
+          </Key>
+          <Property Name="FirstName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="StudentsInsertAllow">
+          <Key>
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="BirthDate" />
+          </Key>
+          <Property Name="FirstName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="StudentsWithoutAssesment">
+          <Key>
+            <PropertyRef Name="GroupName" />
+            <PropertyRef Name="FullName" />
+          </Key>
+          <Property Name="GroupName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FullName" Type="String" MaxLength="81" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ViewDepartmentFaculty">
+          <Key>
+            <PropertyRef Name="Faculty" />
+            <PropertyRef Name="DepName" />
+            <PropertyRef Name="WorkPhone" />
+          </Key>
+          <Property Name="Faculty" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DepName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="WorkPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Achieveme__Stude__656C112C">
+          <End Role="Students" Type="Self.Student" Multiplicity="1" />
+          <End Role="Achievements" Type="Self.Achievement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Achievements">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Achieveme__Subje__66603565">
+          <End Role="Subjects" Type="Self.Subject" Multiplicity="1" />
+          <End Role="Achievements" Type="Self.Achievement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Achievements">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teachers__Depart__286302EC">
+          <End Role="Departments" Type="Self.Department" Multiplicity="1" />
+          <End Role="Teachers" Type="Self.Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teachers">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Groups__FacultyI__5FB337D6">
+          <End Role="Faculties" Type="Self.Faculty" Multiplicity="1" />
+          <End Role="Groups" Type="Self.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculties">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Groups">
+              <PropertyRef Name="FacultyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Groups">
+          <End Role="Groups" Type="Self.Group" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TeacherSubject">
+          <End Role="Subjects" Type="Self.Subject" Multiplicity="*" />
+          <End Role="Teachers" Type="Self.Teacher" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="TeachersDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Achievements" EntityType="Self.Achievement" />
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Faculties" EntityType="Self.Faculty" />
+          <EntitySet Name="Groups" EntityType="Self.Group" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <EntitySet Name="Subjects" EntityType="Self.Subject" />
+          <EntitySet Name="Teachers" EntityType="Self.Teacher" />
+          <EntitySet Name="AllInSummers" EntityType="Self.AllInSummer" />
+          <EntitySet Name="StudentAssesments" EntityType="Self.StudentAssesment" />
+          <EntitySet Name="Students1998" EntityType="Self.Students1998" />
+          <EntitySet Name="StudentsInsertAllows" EntityType="Self.StudentsInsertAllow" />
+          <EntitySet Name="StudentsWithoutAssesments" EntityType="Self.StudentsWithoutAssesment" />
+          <EntitySet Name="ViewDepartmentFaculties" EntityType="Self.ViewDepartmentFaculty" />
+          <AssociationSet Name="FK__Achieveme__Stude__656C112C" Association="Self.FK__Achieveme__Stude__656C112C">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Achievements" EntitySet="Achievements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Achieveme__Subje__66603565" Association="Self.FK__Achieveme__Subje__66603565">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Achievements" EntitySet="Achievements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teachers__Depart__286302EC" Association="Self.FK__Teachers__Depart__286302EC">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Teachers" EntitySet="Teachers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Groups__FacultyI__5FB337D6" Association="Self.FK__Groups__FacultyI__5FB337D6">
+            <End Role="Faculties" EntitySet="Faculties" />
+            <End Role="Groups" EntitySet="Groups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Groups" Association="Self.FK_Students_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="TeacherSubject" Association="Self.TeacherSubject">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Teachers" EntitySet="Teachers" />
+          </AssociationSet>
+          <FunctionImport Name="GetAllPeoples" IsComposable="true" ReturnType="Collection(TeachersDbModel.GetAllPeoples_Result)" />
+          <FunctionImport Name="AddNewGroup">
+            <Parameter Name="groupName" Mode="In" Type="String" />
+            <Parameter Name="faculty" Mode="In" Type="Int32" />
+            <Parameter Name="groupId" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ShowGroupFaculty" ReturnType="Collection(TeachersDbModel.ShowGroupFaculty_Result)">
+          <Parameter Name="faculty" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="TeacherAgeById">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="age" Mode="InOut" Type="Int32" />
+            <Parameter Name="day" Mode="InOut" Type="Int32" />
+            <Parameter Name="month" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="ShowGroupFaculty_Result">
+          <Property Type="String" Name="GroupName" Nullable="false" MaxLength="40" />
+          <Property Type="Int32" Name="StudentsCount" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище TeachersDbModelContainer" CdmEntityContainer="TeachersDbEntities">
+          <EntitySetMapping Name="Achievements">
+            <EntityTypeMapping TypeName="TeachersDbModel.Achievement">
+              <MappingFragment StoreEntitySet="Achievements">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="Assesment" ColumnName="Assesment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="TeachersDbModel.Department">
+              <MappingFragment StoreEntitySet="Departments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Department1" ColumnName="Department" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Faculties">
+            <EntityTypeMapping TypeName="TeachersDbModel.Faculty">
+              <MappingFragment StoreEntitySet="Faculties">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="TeachersDbModel.Group">
+              <MappingFragment StoreEntitySet="Groups">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
+                <ScalarProperty Name="StudentsCount" ColumnName="StudentsCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="TeachersDbModel.Student">
+              <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Grants" ColumnName="Grants" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="TeachersDbModel.Subject">
+              <MappingFragment StoreEntitySet="Subjects">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teachers">
+            <EntityTypeMapping TypeName="TeachersDbModel.Teacher">
+              <MappingFragment StoreEntitySet="Teachers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AllInSummers">
+            <EntityTypeMapping TypeName="TeachersDbModel.AllInSummer">
+              <MappingFragment StoreEntitySet="AllInSummer">
+                <ScalarProperty Name="In_Summer" ColumnName="In Summer" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentAssesments">
+            <EntityTypeMapping TypeName="TeachersDbModel.StudentAssesment">
+              <MappingFragment StoreEntitySet="StudentAssesments">
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="Faculty" ColumnName="Faculty" />
+                <ScalarProperty Name="Assesment" ColumnName="Assesment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students1998">
+            <EntityTypeMapping TypeName="TeachersDbModel.Students1998">
+              <MappingFragment StoreEntitySet="Students1998">
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentsInsertAllows">
+            <EntityTypeMapping TypeName="TeachersDbModel.StudentsInsertAllow">
+              <MappingFragment StoreEntitySet="StudentsInsertAllow">
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentsWithoutAssesments">
+            <EntityTypeMapping TypeName="TeachersDbModel.StudentsWithoutAssesment">
+              <MappingFragment StoreEntitySet="StudentsWithoutAssesments">
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewDepartmentFaculties">
+            <EntityTypeMapping TypeName="TeachersDbModel.ViewDepartmentFaculty">
+              <MappingFragment StoreEntitySet="ViewDepartmentFaculty">
+                <ScalarProperty Name="Faculty" ColumnName="Faculty" />
+                <ScalarProperty Name="DepName" ColumnName="DepName" />
+                <ScalarProperty Name="WorkPhone" ColumnName="WorkPhone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="TeacherSubject" TypeName="TeachersDbModel.TeacherSubject" StoreEntitySet="TeacherSubject">
+            <EndProperty Name="Subjects">
+              <ScalarProperty Name="Id" ColumnName="SubjectId" />
+            </EndProperty>
+            <EndProperty Name="Teachers">
+              <ScalarProperty Name="Id" ColumnName="TeacherId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionName="Хранилище TeachersDbModel.GetAllPeoples" FunctionImportName="GetAllPeoples">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TeachersDbModel.GetAllPeoples_Result">
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AddNewGroup" FunctionName="Хранилище TeachersDbModel.AddNewGroup" />
+          <FunctionImportMapping FunctionImportName="ShowGroupFaculty" FunctionName="Хранилище TeachersDbModel.ShowGroupFaculty">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TeachersDbModel.ShowGroupFaculty_Result">
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="StudentsCount" ColumnName="StudentsCount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TeacherAgeById" FunctionName="Хранилище TeachersDbModel.TeacherAgeById" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
