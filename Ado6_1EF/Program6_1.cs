@@ -30,11 +30,17 @@ namespace Ado6_1EF
             // отобразить список статей
             //PrintAllArticles(db);
 
-            // отобразить всех авторов и их публикации
-            PrintAllAuthorsAllArticles(db);
+            // отобразить всех авторов и их публикации - безотложная загрузка
+            //PrintAllAuthorsAllArticles(db);
 
-            Console.WriteLine("\npress any key...");
-            Console.ReadKey();
+            // отобразить всех авторов и их публикации - явная загрузка
+            //PrintAllAuthorsAllArticlesExplicit(db);
+
+            // отобразить всех авторов и их публикации - явная загрузка (#2)
+            PrintAllAuthorsAllArticlesExplicit2(db);
+
+            Console.WriteLine("\npress Enter key...");
+            Console.ReadLine();
         }
         private static void DeleteAuthor(NewsDb db)
         {
@@ -146,6 +152,40 @@ namespace Ado6_1EF
                 {
                     Console.WriteLine($"\t{article.Title} - {article.PublishDate.ToShortDateString()}");
                 }
+            }
+        }
+
+        private static void PrintAllAuthorsAllArticlesExplicit(NewsDb db)
+        {
+            Console.WriteLine("All publications (explicit loading): ");
+            var authors = db.Authors.ToList();
+            foreach (Author author in authors)
+            {
+
+                Console.WriteLine(author);
+                Console.WriteLine("Publication: ");
+
+                // explicit loading (явная загрузка)
+                db.Entry(author).Collection("Articles").Load();
+
+                foreach (Article article in author.Articles.ToList())
+                {
+                    Console.WriteLine($"\t{article.Title} - {article.PublishDate.ToShortDateString()}");
+                }
+            }
+        }
+
+        private static void PrintAllAuthorsAllArticlesExplicit2(NewsDb db)
+        {
+            Console.WriteLine("All publications (explicit loading): ");
+            var articles = db.Articles.ToList();
+            foreach (Article article in articles)
+            {
+                // explicit loading (явная загрузка)
+                db.Entry(article).Reference("Author").Load();
+
+                // отображаем публикацию и автора
+                Console.WriteLine($"{article.Title} ({article.Author.Firstname} {article.Author.Lastname})");
             }
         }
     }
