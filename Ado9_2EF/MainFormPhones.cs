@@ -85,5 +85,11 @@ namespace Ado9_2EF
             //dgvPhones.DataSource = m.Phones?.ToList();
             dgvPhones.DataSource= phonesDb.Phones.Where(p => p.ManufacturerId == m.Id).ToList();
         }
+
+        private void btnTestRawSql_Click(object sender, EventArgs e)
+        {
+            string mess = phonesDb.GetTablesQuery();
+            MessageBox.Show(mess);
+        }
     }
 }

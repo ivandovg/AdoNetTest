@@ -31,6 +31,7 @@
             this.dgvManufacturers = new System.Windows.Forms.DataGridView();
             this.dgvPhones = new System.Windows.Forms.DataGridView();
             this.btnSaveChanges = new System.Windows.Forms.Button();
+            this.btnTestRawSql = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvManufacturers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPhones)).BeginInit();
             this.SuspendLayout();
@@ -72,11 +73,22 @@
             this.btnSaveChanges.Text = "Save and Update";
             this.btnSaveChanges.UseVisualStyleBackColor = true;
             // 
+            // btnTestRawSql
+            // 
+            this.btnTestRawSql.Location = new System.Drawing.Point(12, 415);
+            this.btnTestRawSql.Name = "btnTestRawSql";
+            this.btnTestRawSql.Size = new System.Drawing.Size(121, 23);
+            this.btnTestRawSql.TabIndex = 3;
+            this.btnTestRawSql.Text = "Test RawSql";
+            this.btnTestRawSql.UseVisualStyleBackColor = true;
+            this.btnTestRawSql.Click += new System.EventHandler(this.btnTestRawSql_Click);
+            // 
             // MainFormPhones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(610, 450);
+            this.Controls.Add(this.btnTestRawSql);
             this.Controls.Add(this.btnSaveChanges);
             this.Controls.Add(this.dgvPhones);
             this.Controls.Add(this.dgvManufacturers);
@@ -94,6 +106,7 @@
         private System.Windows.Forms.DataGridView dgvManufacturers;
         private System.Windows.Forms.DataGridView dgvPhones;
         private System.Windows.Forms.Button btnSaveChanges;
+        private System.Windows.Forms.Button btnTestRawSql;
     }
 }
 

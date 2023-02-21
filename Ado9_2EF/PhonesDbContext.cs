@@ -9,11 +9,12 @@ namespace Ado9_2EF
 {
     internal class PhonesDbContext: DbContext
     {
-        public PhonesDbContext():base("PhonesDbConnection") { }
-        public PhonesDbContext(string connectionString):base(connectionString) { }
 
         public DbSet<Manufacturer> Manufacturers { get; set; }
         public DbSet<Phone> Phones { get; set; }
+
+        public PhonesDbContext():base("PhonesDbConnection") { }
+        public PhonesDbContext(string connectionString):base(connectionString) { }
 
         protected override void OnModelCreating(DbModelBuilder builder)
         {
@@ -30,14 +31,20 @@ namespace Ado9_2EF
             builder.Configurations.Add(new ManufacturerConfiguration());
             builder.Configurations.Add(new PhoneConfiguration());
 
-            base.OnModelCreating(builder);
+            //base.OnModelCreating(builder);
         }
 
-        //public string GetTestQuery(string sql)
-        //{
-        //    //var Database.SqlQuery(sql, p1);
-        //    return sql;
-        //}
+        public string GetTablesQuery()
+        {
+            string sql = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'";
+            var result = Database.SqlQuery<string>(sql);
+            StringBuilder r = new StringBuilder();
+            foreach (string s in result)
+            {
+                r.AppendLine(s);
+            }
+            return r.ToString();
+        }
     }
 
     internal class Manufacturer
