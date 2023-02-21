@@ -24,7 +24,7 @@ namespace Ado9_2EF
                 FillTemplateData();
             }
             dgvManufacturers.SelectionChanged += DgvManufacturers_SelectionChanged;
-            dgvManufacturers.DataSource = phonesDb.Manufacturers.ToList();
+            dgvManufacturers.DataSource = new BindingList<Manufacturer>(phonesDb.Manufacturers.ToList());
 
             btnSaveChanges.Click += BtnSaveChanges_Click;
         }
@@ -68,8 +68,8 @@ namespace Ado9_2EF
         private void BtnSaveChanges_Click(object sender, EventArgs e)
         {
             phonesDb.SaveChanges();
-            dgvManufacturers.DataSource = null;
-            dgvManufacturers.DataSource = phonesDb.Manufacturers.ToList();
+            //dgvManufacturers.DataSource = null;
+            //dgvManufacturers.DataSource = phonesDb.Manufacturers.ToList();
         }
 
         private void DgvManufacturers_SelectionChanged(object sender, EventArgs e)

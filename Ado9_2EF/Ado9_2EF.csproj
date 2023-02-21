@@ -63,20 +63,12 @@
     <Compile Include="MainFormPhones.Designer.cs">
       <DependentUpon>MainFormPhones.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202302161737440_Initial.cs" />
-    <Compile Include="Migrations\202302161737440_Initial.designer.cs">
-      <DependentUpon>202302161737440_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PhonesDbConfiguration.cs" />
     <Compile Include="PhonesDbContext.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MainFormPhones.resx">
       <DependentUpon>MainFormPhones.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202302161737440_Initial.resx">
-      <DependentUpon>202302161737440_Initial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

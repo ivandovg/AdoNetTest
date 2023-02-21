@@ -33,11 +33,11 @@ namespace Ado9_2EF
             base.OnModelCreating(builder);
         }
 
-        public string GetTestQuery(string sql)
-        {
-            //Database.SqlQuery(sql, p1);
-            return sql;
-        }
+        //public string GetTestQuery(string sql)
+        //{
+        //    //var Database.SqlQuery(sql, p1);
+        //    return sql;
+        //}
     }
 
     internal class Manufacturer
