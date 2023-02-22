@@ -19,7 +19,10 @@
             //teachersDb.PrintAllTeachersAndDepartments();
 
             // добавить группу
-            teachersDb.AddNewGroup();
+            // teachersDb.AddNewGroup();
+
+            // отобразить название кафедры и преподавателей
+            teachersDb.PrintDepartmentAndTeachers();
 
             Console.WriteLine("\npress ENTER key...");
             Console.ReadLine();

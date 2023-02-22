@@ -123,5 +123,39 @@ namespace Ado11_1
                 Console.WriteLine(g);
             }
         }
+
+        public void PrintDepartmentAndTeachers()
+        {
+            var lookup = new Dictionary<int, Department>();
+            dbConnection.Query<Department, Teacher, Department>(
+                "select * from Departments as D " +
+                "join Teachers as T on D.Id = T.DepartmentId"
+                , (d, t) =>
+                {
+                    Department? department;
+                    if (!lookup.TryGetValue(d.Id, out department))
+                    {
+                        lookup.Add(d.Id, department = d);
+                    }
+                    if (department.Teachers == null)
+                    {
+                        department.Teachers = new List<Teacher>();
+                    }
+                    department.Teachers.Add(t);
+                    return department;
+                }).AsQueryable();
+
+            foreach (Department department in lookup.Values)
+            {
+                Console.WriteLine($"Department = {department.Name}, {department.Phone}");
+                if (department.Teachers != null)
+                {
+                    foreach (Teacher teacher in department.Teachers)
+                    {
+                        Console.WriteLine($"\t{teacher.Firstname} {teacher.Lastname}");
+                    }
+                }
+            }
+        }
     }
 }
