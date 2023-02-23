@@ -157,5 +157,167 @@ namespace Ado11_1
                 }
             }
         }
+
+        public void AddFaculties()
+        {
+            Console.WriteLine("Add Faculty");
+            //// пакетная вставка, с использованием анонимных объектов
+            //var faculties = new List<object>();
+            //for (int i = 1; i <= 5; i++)
+            //{
+            //    faculties.Add(new { Name = "Faculty " + i });
+            //}
+
+            // пакетная вставка, с использованием типизированных объектов
+            var faculties = new List<Faculty>();
+            for (int i = 11; i <= 15; i++)
+            {
+                faculties.Add(new Faculty { Name = "Faculty " + i });
+            }
+
+            var result = dbConnection.Execute("insert into Faculties(Name) values(@Name)", faculties);
+            Console.WriteLine("\nResult = " + result);
+        }
+
+        public void DeleteFaculties()
+        {
+            Console.WriteLine("Delete Faculty");
+            // пакетное удаление, с использованием анонимных объектов
+            var faculties = new List<int>();
+            int id = 0;
+            while (true)
+            {
+                Console.Write("Enter Id (write -1 to break) = ");
+                id = int.Parse(Console.ReadLine());
+                if (id < 0)
+                    break;
+                faculties.Add(id);
+            }
+
+            // открытие транзакции
+            IDbTransaction tran = dbConnection.BeginTransaction();
+            try
+            {
+                var result = dbConnection.Execute("delete from Faculties where (Id in @faculties)"
+                    , new { faculties }, transaction: tran);
+                Console.WriteLine("\nAffected records = " + result);
+
+                tran.Commit();
+
+                PrintFaculties();
+            }
+            catch (Exception ex)
+            {
+                tran.Rollback();
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        public void UpdateFaculties()
+        {
+            Console.WriteLine("Update Faculty");
+            PrintFaculties();
+            // обновление
+            var faculty = new Faculty();
+            Console.Write("\nEnetr Id = ");
+            faculty.Id = int.Parse(Console.ReadLine());
+            Console.Write("Enter new name = ");
+            faculty.Name = Console.ReadLine();
+            
+            // открытие транзакции
+            IDbTransaction tran = dbConnection.BeginTransaction();
+            try
+            {
+                var result = dbConnection.Execute("update Faculties set Name = @Name where (Id = @Id)", 
+                    faculty, transaction: tran);
+                Console.WriteLine("\nAffected records = " + result);
+
+                tran.Commit();
+
+                PrintFaculties();
+            }
+            catch (Exception ex)
+            {
+                tran.Rollback();
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        public void PrintFaculties()
+        {
+            Console.WriteLine("\nPrint Faculty");
+            var faculties = dbConnection.Query<Faculty>("select * from Faculties");
+            foreach (Faculty faculty in faculties)
+            {
+                Console.WriteLine($"{faculty.Id} - {faculty.Name}");
+            }
+        }
+
+        public void MultiQueryDapper()
+        {
+            string sql = "select * from Teachers;" +
+                "select * from Faculties;" +
+                "select * from Groups;";
+
+            using (var multi=dbConnection.QueryMultiple(sql))
+            {
+                var teachers = multi.Read<Teacher>().ToList();
+                var faculties = multi.Read<Faculty>().ToList();
+                var groups = multi.Read<Group>().ToList();
+
+                Console.WriteLine("Teachers list: ");
+                foreach (Teacher teacher in teachers)
+                {
+                    Console.WriteLine($"\t{teacher.Firstname} {teacher.Lastname}");
+                }
+
+                Console.WriteLine("Faculties list: ");
+                foreach (Faculty faculty in faculties)
+                {
+                    Console.WriteLine($"\t{faculty.Name}");
+                }
+
+                Console.WriteLine("Groups list: ");
+                foreach (Group group in groups)
+                {
+                    Console.WriteLine($"\t{group.Name} - {group.StudentsCount}");
+                }
+            } 
+        }
+
+        public void PrintGroupFaculty()
+        {
+            Console.Write("Enter faculty id = ");
+            int id = int.Parse(Console.ReadLine());
+
+            var result = dbConnection.Query("GroupsOnFaculty" 
+                , new {id}
+                , commandType: CommandType.StoredProcedure);
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item);
+            }
+        }
+
+        public void ExecuteScalarFunc()
+        {
+            Console.Write("FirstName = ");
+            string firstName = Console.ReadLine();
+            Console.Write("LastName = ");
+            string lastName = Console.ReadLine();
+            var result = dbConnection.ExecuteScalar<int>(
+                "select dbo.GetSubjectCount(@firstName, @lastName)"
+                , new { firstName, lastName });
+
+            Console.WriteLine("\nResult = " + result);
+        }
+
+        public void ExecuteScalarStudentsCount()
+        {
+            var result = dbConnection.ExecuteScalar<int>("select count(*) from Students");
+
+            Console.WriteLine("\nStudentsCount = " + result);
+        }
     }
 }

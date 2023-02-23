@@ -11,6 +11,7 @@ namespace Ado10_1EF
     {
         public DbSet<Person> People { get; set; }
         public DbSet<Training> Trainings { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         private string connectionString;
 
@@ -21,13 +22,13 @@ namespace Ado10_1EF
         public GymDbContext(DbContextOptions options) : base(options) 
         {
             connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["MyConnection1"].ConnectionString;
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
 
         public GymDbContext(string connectionString) 
         {
             this.connectionString = connectionString;
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
@@ -78,6 +79,12 @@ namespace Ado10_1EF
         public bool WithTrainer { get; set; }
         public int PersonId { get; set; }
         public virtual Person? Person { get; set; }
+    }
+
+    internal class Product
+    {
+        public int Id { get; set; }
+        public string TestName { get; set; }
     }
     #endregion
 }

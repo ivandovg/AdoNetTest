@@ -22,7 +22,29 @@
             // teachersDb.AddNewGroup();
 
             // отобразить название кафедры и преподавателей
-            teachersDb.PrintDepartmentAndTeachers();
+            //teachersDb.PrintDepartmentAndTeachers();
+
+            // добавить факультеты и вывести список на консоль
+            //teachersDb.AddFaculties();
+            //teachersDb.PrintFaculties();
+
+            // пакетное удаление, с использованием анонимных объектов и вывести список на консоль
+            //teachersDb.PrintFaculties();
+            //teachersDb.DeleteFaculties();
+            //teachersDb.PrintFaculties();
+
+            // обновить запись
+            // teachersDb.UpdateFaculties();
+
+            // мультизапрос
+            //teachersDb.MultiQueryDapper();
+
+            // использование хранимой процедуры, которая возвращает таблицу
+            // teachersDb.PrintGroupFaculty();
+
+            // получение скалярных значений
+            //teachersDb.ExecuteScalarFunc(); // вызов пользовательской скалярной функции
+            teachersDb.ExecuteScalarStudentsCount(); // вызов итоговой функции
 
             Console.WriteLine("\npress ENTER key...");
             Console.ReadLine();

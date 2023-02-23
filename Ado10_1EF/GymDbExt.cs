@@ -57,4 +57,15 @@ namespace Ado10_1EF
                 .HasDefaultValue(false);
         }
     }
+
+    internal class ProductConfiguration : IEntityTypeConfiguration<Product>
+    {
+        public void Configure(EntityTypeBuilder<Product> builder)
+        {
+            builder.ToTable("Trainings").HasKey(p => p.Id);
+            builder.Property(p => p.TestName)
+                .IsRequired()
+                .HasDefaultValueSql("noname");
+        }
+    }
 }

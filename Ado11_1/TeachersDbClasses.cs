@@ -24,4 +24,21 @@ namespace Ado11_1
         public int DepartmentId { get; set; }
         public Department Department { get; set;}
     }
+
+    internal class Faculty
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+
+        public ICollection<Group> Groups => new HashSet<Group>();
+    }
+
+    internal class Group
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int StudentsCount { get; set; }
+        public int FacultyId { get; set; }
+        public Faculty? Faculty { get; set; }
+    }
 }
